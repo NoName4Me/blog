@@ -25,8 +25,8 @@ tags:
     <div class="item">I-3</div>
     <div class="item">I-4</div>
 </div>
-
 ```
+<!-- more -->
 ## 2.1 设置容器以网格形式呈现
 
 ```js

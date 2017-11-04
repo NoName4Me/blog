@@ -29,7 +29,7 @@ categories:
 url设置为`https://www.google.com/ncr#q=%s&safe=off`
 
 ## 常用搜索小技巧
-
+<!-- more -->
 ### 字符
 
 | 符号 | 作用 | 举个栗子 |

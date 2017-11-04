@@ -1,5 +1,6 @@
 ---
 title: 阿里云ECS+shadowsocks 科学上网
+date: 2017-10-19 23:39:17
 categories:
 - 利器
 ---
@@ -20,6 +21,8 @@ categories:
 ```bash
 # 这里只示例一键安装python版，其它的参考文末
 wget --no-check-certificate -O shadowsocks.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
+
+<!-- more -->
 
 # 设置权限
 chmod +x shadowsocks.sh

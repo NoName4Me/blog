@@ -6,8 +6,6 @@ categories:
 - 利器
 - hexo
 ---
-
-
 # 1. hexo嵌入CodePen
 
 在[codepen](https://codepen.io)页面右下角点击embed，复制iframe（或html）菜单下的代码到下面代码块的`EMBED`里即可。
@@ -25,7 +23,7 @@ EMBED
 <p data-height="265" data-theme-id="dark" data-slug-hash="LkdOwj" data-default-tab="js,result" data-user="ge1doot" data-embed-version="2" data-pen-title="The Last Experience" data-preview="true" class="codepen">See the Pen <a href="https://codepen.io/ge1doot/pen/LkdOwj/">The Last Experience</a> by Gerard Ferrandez (<a href="https://codepen.io/ge1doot">@ge1doot</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 {% endraw %}
-
+<!-- more -->
 # 2. hexo嵌入jsFiddle
 
 hexo直接支持jsfiddle，所以如果有这么个代码片段`https://jsfiddle.net/5zyvfgav/`，那么直接嵌入到如下模板中（用`5zyvfgav`替换`shorttag`）：

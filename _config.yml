@@ -81,3 +81,10 @@ deploy:
   repo: https://github.com/NoName4Me/noname4me.github.io.git
   branch: master
 
+# Algolia Search
+algolia:
+  applicationID: 'TX3HWHW4MX'
+  apiKey: '37cddc76297f3056858eea2ec2c60561'
+  adminApiKey: 'adminApiKey'
+  indexName: 'gitpage_blog_search'
+  chunkSize: 5000
