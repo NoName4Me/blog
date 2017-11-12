@@ -22,8 +22,6 @@ categories:
 # 这里只示例一键安装python版，其它的参考文末
 wget --no-check-certificate -O shadowsocks.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
 
-<!-- more -->
-
 # 设置权限
 chmod +x shadowsocks.sh
 
@@ -33,6 +31,8 @@ chmod +x shadowsocks.sh
 
 # 安装完成会展示刚才输入的信息，注意保存。
 ```
+<!-- more -->
+
 * STEP_3
 配置ECS开启上面设置的端口，在阿里云控制台，进入ECS实例管理，找到对应的实例，`操作`列中，`更多`里选择`安全组配置`，在`配置规则`中增加*入方向*的规则即可。
 
