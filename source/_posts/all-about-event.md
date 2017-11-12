@@ -1,5 +1,5 @@
 ---
-title: 前端常用的事件总结（Mouse/keyboard等）
+title: 前端常用的事件总结（待续）
 date: 2017-11-12 21:51:35
 categories:
 - 前端
@@ -8,7 +8,7 @@ tags:
 - DomEvent
 ---
 
-## 1. Mouse事件
+# 1. Mouse事件
 
 ## 1.1 鼠标进/出
 一共有两对，`mouseenter`/`mouseleave`和`mouseover`/`mouseout`，两者的区别如下：
