@@ -18,7 +18,7 @@ tags:
 请看示例（仔细体会）：
 
 {% raw %}
-<p data-height="265" data-theme-id="0" data-slug-hash="bYWBzv" data-default-tab="result" data-user="blurnull" data-embed-version="2" data-pen-title="all-about-event" class="codepen">See the Pen <a href="https://codepen.io/blurnull/pen/bYWBzv/">all-about-event</a> by BlurNull (<a href="https://codepen.io/blurnull">@blurnull</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="265" data-theme-id="dark" data-slug-hash="bYWBzv" data-default-tab="result" data-user="blurnull" data-embed-version="2" data-pen-title="all-about-event" data-preview="true" class="codepen">See the Pen <a href="https://codepen.io/blurnull/pen/bYWBzv/">all-about-event</a> by BlurNull (<a href="https://codepen.io/blurnull">@blurnull</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 {% endraw %}
 
