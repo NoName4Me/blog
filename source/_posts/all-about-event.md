@@ -1,5 +1,5 @@
 ---
-title: 前端常用的事件总结（待续）
+title: 前端常见Event总结（待续）
 date: 2017-11-12 21:51:35
 categories:
 - 前端
@@ -7,6 +7,10 @@ tags:
 - js
 - DomEvent
 ---
+
+小角度总结一下事件。
+
+{% asset_img Event.png Fig1. Events in This Post %}
 
 # 1. Mouse事件
 
@@ -23,3 +27,17 @@ tags:
 {% endraw %}
 
 <!-- more -->
+
+## 1.2 鼠标点击
+
+一次左键单击触发事件：`mousedown`-->`mouseup`-->`click`
+一次左键双击触发事件：`mousedown`-->`mouseup`-->`click`-->`mousedown`-->`mouseup`-->`click`-->`dblclick`
+一次中键单击触发事件：`mousedown`-->`mouseup`
+一次右键单击触发事件：`mousedown`-->`contextmenu`
+
+请看示例：
+
+{% raw %}
+<p data-height="265" data-theme-id="dark" data-slug-hash="OOgVLy" data-default-tab="result" data-user="blurnull" data-embed-version="2" data-pen-title="Event-MouseClick" data-preview="true" class="codepen">See the Pen <a href="https://codepen.io/blurnull/pen/OOgVLy/">Event-MouseClick</a> by BlurNull (<a href="https://codepen.io/blurnull">@blurnull</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+{% endraw %}
