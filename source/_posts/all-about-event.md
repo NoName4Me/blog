@@ -12,7 +12,7 @@ tags:
 
 {% asset_img Event.png Fig1. Events in This Post %}
 
-# 1. Mouse事件
+# 1. MouseEvent
 
 ## 1.1 鼠标进/出
 一共有两对，`mouseenter`/`mouseleave`和`mouseover`/`mouseout`，两者的区别如下：
@@ -41,3 +41,13 @@ tags:
 <p data-height="265" data-theme-id="dark" data-slug-hash="OOgVLy" data-default-tab="result" data-user="blurnull" data-embed-version="2" data-pen-title="Event-MouseClick" data-preview="true" class="codepen">See the Pen <a href="https://codepen.io/blurnull/pen/OOgVLy/">Event-MouseClick</a> by BlurNull (<a href="https://codepen.io/blurnull">@blurnull</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 {% endraw %}
+
+# 2. KeyboardEvent
+>**Note:** 如果是为了处理输入事件，最好使用`InputEvent`，因为`KeyboardEvent`只代表键盘事件，非键盘的输入可能无法如你所愿哦～
+
+响应顺序：`keydown` --> `keyup` --> `keypress`。
+
+[键盘编码参考KeyboardEvent.code](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code#Code_values_on_Windows)
+
+`// TODO add select article link.`
+一般的，非输入DOMElement无法响应`KeyboardEvent`，但是可以添加`tabindex=数字`属性强制让其可以focus，从而响应。
