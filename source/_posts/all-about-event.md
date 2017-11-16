@@ -42,7 +42,19 @@ tags:
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 {% endraw %}
 
-## 1.3 鼠标事件忽略
+## 1.3 滚动（轮）
+触发顺序：`wheel` --> `scroll`，即使无法滚动时也能触发`wheel`事件。
+
+请看示例（Chrome浏览器），注意当无法滚动时，触发的事件：
+{% raw %}
+<p data-height="265" data-theme-id="dark" data-slug-hash="bYoJgx" data-default-tab="result" data-user="blurnull" data-embed-version="2" data-pen-title="scroll-wheel" data-preview="true" class="codepen">See the Pen <a href="https://codepen.io/blurnull/pen/bYoJgx/">scroll-wheel</a> by BlurNull (<a href="https://codepen.io/blurnull">@blurnull</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+{% endraw %}
+
+
+[浏览器兼容方案参考官方示例](https://developer.mozilla.org/en-US/docs/Web/Events/wheel#Listening_to_this_event_across_browser)
+
+## 1.4 鼠标事件忽略
 
 要想使元素不响应`MouseEvent`（无法鼠标点击触发`hover`、`focus`样式，**`TAB`键可以触发哦**），即让其被鼠标事件忽略该元素，直接穿透到其下方元素，设置样式`pointer-events:none;`即可。
 
@@ -60,5 +72,7 @@ tags:
 
 [键盘编码参考KeyboardEvent.code](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code#Code_values_on_Windows)
 
+[在线获取keyCode](http://keycode.info/)
+
 `// TODO add select article link.`
-一般的，非输入DOMElement无法响应`KeyboardEvent`，但是可以添加`tabindex=数字`属性强制让其可以focus，从而响应（见`1.3`节示例）。
+一般的，非输入DOMElement无法响应`KeyboardEvent`，但是可以添加`tabindex=数字`属性强制让其可以focus，从而响应（见`1.4`节示例）。
