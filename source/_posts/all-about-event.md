@@ -68,6 +68,7 @@ tags:
 # 2. KeyboardEvent
 >**Note:** 如果是为了处理输入事件，最好使用`InputEvent`，因为`KeyboardEvent`只代表键盘事件，非键盘的输入可能无法如你所愿哦～
 
+# 2.1 基础
 响应顺序：`keydown` --> `keyup` --> `keypress`。
 
 [键盘编码参考KeyboardEvent.code](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code#Code_values_on_Windows)
@@ -76,3 +77,14 @@ tags:
 
 `// TODO add select article link.`
 一般的，非输入DOMElement无法响应`KeyboardEvent`，但是可以添加`tabindex=数字`属性强制让其可以focus，从而响应（见`1.4`节示例）。
+
+# 2.2 组合键
+
+`Ctrl`、`Shift`、`Alt`、`Meta`在键盘事件中都有对应的标志位(`true/false`)：`ctrlKey`、`shiftKey`、`altKey`、`metaKey`。
+
+请看示例（Ctrl+c/v复制小球）：
+
+{% raw %}
+<p data-height="265" data-theme-id="dark" data-slug-hash="POERXz" data-default-tab="result" data-user="blurnull" data-embed-version="2" data-pen-title="combined-key" data-preview="true" class="codepen">See the Pen <a href="https://codepen.io/blurnull/pen/POERXz/">combined-key</a> by BlurNull (<a href="https://codepen.io/blurnull">@blurnull</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+{% endraw %}
