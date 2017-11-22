@@ -42,3 +42,32 @@ chrome://flags/#enable-devtools-experiments
 
 
 [Accessibility Inspector](https://gist.github.com/marcysutton/0a42f815878c159517a55e6652e3b23a)
+
+
+## Element
+
+|  快捷键   |  功能  |
+| -------- | ------ |
+|`F2`|以HTML形式编辑|
+|`ctrl + enter`|保存更改|
+|`esc`|退出不保存|
+|`鼠标选中移动`||
+|`delete`|删除|
+|`ctrl + z`|撤销|
+
+
+悬浮会有高亮当前页面元素，如果不在视窗内，会提示在边缘位置，右键选择`Scroll into View`跳转到元素。
+
+* Event Listeners
+
+`handler`上右键选择`show function defination`跳转到源码查看定义。
+
+* DOM Breakpoints
+
+在`Element`页签中的元素上右键，选择`break on`中的一项，会增加断点到`DOM Breakpoints`栏目下。
+
+
+
+* Animation
+
+{% asset_img annotated-animation-inspector.png Fig1. 动画面板 %}
