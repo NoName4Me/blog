@@ -42,6 +42,7 @@ chrome://flags/#enable-devtools-experiments
 
 [Accessibility Inspector](https://gist.github.com/marcysutton/0a42f815878c159517a55e6652e3b23a)
 
+<!-- more -->
 
 ## Element
 
@@ -87,3 +88,65 @@ chrome://flags/#enable-devtools-experiments
 |`+`|增加css规则|
 |`长按+`|增加css规则，并选择添加到哪个样式文件里|
 |`点击某个颜色前面的彩色小方块`|打开颜色拾取器|
+
+## Sources
+
+* 设置条件断点
+
+在某一行行号处右键，`Add conditional breakpoint...`，输入条件回车。（若已有断点，选择`Edit breakpoint`即可。）
+
+
+### Source Map
+
+示例代码：
+
+`test.html`
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="test.min.js"></script>
+    <title>Source Map Demo</title>
+</head>
+<body>
+</body>
+</html>
+```
+`test.js`
+```js
+function justTest(name) {
+    var addr = "jonge.club";
+    console.log("hi "+name+", you are on "+Addr+" at "+new Date()+".");
+}
+
+justTest("stranger");
+
+```
+
+使用source map（以uglify-js为例说明）
+
+```bash
+# 安装uglify-js
+npm install uglify-js -g
+
+# 生成包含source map信息的压缩后js文件
+## 确保root/url可以被访问到，root也可以是网络地址
+uglifyjs test.js -o test.min.js -c -m --source-map "root='/some/path',url='test.min.js.map'" 
+```
+压缩后的js文件（test.min.js）：
+```js
+function justTest(t){console.log("hi "+t+", you are on "+Addr+" at "+new Date+".")}justTest("stranger");
+//# sourceMappingURL=test.min.js.map
+```
+
+在Chrome里开启Source Map（默认开启，`Settings`里），访问test.html，`F12`调试代码（源码）。
+
+-----
+**参考**
+
+[1] [Chrome DevTool Doc](https://developers.google.com/web/tools/chrome-devtools/)
+
+[2] [UglifyJS2 @github](https://github.com/mishoo/UglifyJS2)
