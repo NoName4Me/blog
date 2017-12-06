@@ -5,46 +5,7 @@ tags:
 ---
 
 
-**常用快捷键一览**
-
-* DevTool面板
-
-|  快捷键   |  功能  |
-| -------- | ------ |
-|`ctrl + +/-` | 窗口放大/缩小 |
-|`ctrl + 0` | 窗口默认大小 |
-| `ctrl + shift + j` | 开启Dev模式，并定位到console页签 |
-| `ctrl + [` | 页签切换(向左) |
-|`ctrl + shift + p`|DevTools Command Menu|
-
-* Source页签
-
-|  快捷键   |  功能  |
-| -------- | ------ |
-|`ctrl + g` | 跳转行 |
-|`ctrl + p` | 打开文件 |
-|`F11`|进入函数|
-|`shift + F11`、`ctrl + shift + ;`|跳出函数|
-
-* Console页签
-
-
-|  快捷键   |  功能  |
-| -------- | ------ |
-|<code>ctrl + &#96;</code> | 聚焦到console |
-
-
-
-chrome://flags/#enable-devtools-experiments
-
-`Settings` --> `Experiments`
-
-
-[Accessibility Inspector](https://gist.github.com/marcysutton/0a42f815878c159517a55e6652e3b23a)
-
-<!-- more -->
-
-## Element
+## 1. Element
 
 |  快捷键   |  功能  |
 | -------- | ------ |
@@ -54,7 +15,6 @@ chrome://flags/#enable-devtools-experiments
 |`鼠标选中移动`||
 |`delete`|删除|
 |`ctrl + z`|撤销|
-
 
 悬浮会有高亮当前页面元素，如果不在视窗内，会提示在边缘位置，右键选择`Scroll into View`跳转到元素。
 
@@ -66,9 +26,11 @@ chrome://flags/#enable-devtools-experiments
 
 在`Element`页签中的元素上右键，选择`break on`中的一项，会增加断点到`DOM Breakpoints`栏目下。
 
+<!-- more -->
+
 >**技巧：** 许多扩展程序都会将其自己的事件侦听器添加到DOM上。如果遇到有些不是你的代码设置的事件侦听器，可以在隐身窗口中重新打开页面，默认情况下，隐身窗口会阻止扩展程序运行。
 
-* Animation
+## 2. Animation
 
 位于`Element`同级的更多菜单里进入，或者`ctrl + shift + p`输入`Animation`选择`Drawer Show Animations`进入。
 
@@ -79,7 +41,7 @@ chrome://flags/#enable-devtools-experiments
 3. Timeline：可以暂停和启动动画，或者跳到动画中的特定点。
 4. Details：查看和修改当前选定的动画组（左侧深色代表定义，右侧浅色代表重复，实心球动画起止，空心球关键帧）。
 
-* Styles
+## 3. Styles
 
 |菜单|功能|
 |----|----|
@@ -88,15 +50,28 @@ chrome://flags/#enable-devtools-experiments
 |`+`|增加css规则|
 |`长按+`|增加css规则，并选择添加到哪个样式文件里|
 |`点击某个颜色前面的彩色小方块`|打开颜色拾取器|
+|`shift + 鼠标左击颜色块`|切换颜色描述方式（rgb、hsl、十六进制）|
 
-## Sources
+## 4. Sources
 
 * 设置条件断点
 
 在某一行行号处右键，`Add conditional breakpoint...`，输入条件回车。（若已有断点，选择`Edit breakpoint`即可。）
 
+* 常用快捷键
 
-### Source Map
+|  快捷键   |  功能  |
+| -------- | ------ |
+|`ctrl + p` |打开命令行（输入`?`可以看到支持的命令类型）|
+|`ctrl + g` | 跳转行 |
+|`ctrl + p` | 打开文件 |
+|`F11`|进入函数|
+|`shift + F11`、`ctrl + shift + ;`|跳出函数|
+|`ctrl + shift + f`|全局搜索|
+
+* Source Map
+
+源码与压缩（或者编译）后的代码的映射，便于调试。
 
 示例代码：
 
@@ -143,6 +118,36 @@ function justTest(t){console.log("hi "+t+", you are on "+Addr+" at "+new Date+".
 ```
 
 在Chrome里开启Source Map（默认开启，`Settings`里），访问test.html，`F12`调试代码（源码）。
+
+
+## 5. 其他
+
+* DevTool面板
+
+|  快捷键   |  功能  |
+| -------- | ------ |
+|`ctrl + +/-` | 窗口放大/缩小 |
+|`ctrl + 0` | 窗口默认大小 |
+| `ctrl + shift + j` | 开启Dev模式，并定位到console页签 |
+| `ctrl + [` | 页签切换(向左) |
+|`ctrl + shift + p`|DevTools Command Menu|
+
+* Console页签
+
+
+|  快捷键   |  功能  |
+| -------- | ------ |
+|<code>ctrl + &#96;</code> | 聚焦到console |
+|‘ctrl + l`|清空控制台|
+
+
+* 开启实验功能
+
+`chrome://flags/#enable-devtools-experiments`
+
+`Settings` --> `Experiments`
+
+[Accessibility Inspector](https://gist.github.com/marcysutton/0a42f815878c159517a55e6652e3b23a)
 
 -----
 **参考**
