@@ -1,7 +1,11 @@
 ---
 title: Chrome DevTool使用
 date: 2017-11-22 00:33:18
+categories:
+- 利器
 tags:
+- chrome
+- devTool
 ---
 
 
