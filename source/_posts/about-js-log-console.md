@@ -44,3 +44,9 @@ console.assert(expression, '当前面的表达式为false时，会输出这句�
 ```js
 console.group();
 ```
+
+# 4. 表格`console.table`
+
+```js
+var x = [{name:'jonge1', age:30, email:'h@jonge.club'}, {name:'jonge2', age:40, email:'j@jonge.club'}, {name:'jonge3', age:50}];
+```
