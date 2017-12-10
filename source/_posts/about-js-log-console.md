@@ -5,10 +5,12 @@ categories:
 - 前端
 tags:
 - 日志
-- console.log
+- console
 ---
 
-# 1. 基本`console.log/error/warn`
+> `console.xx()`。
+
+# 1. 基本`log/error/warn`
 
 基本就只是样式的区别。
 
@@ -27,26 +29,48 @@ tags:
 
 {% asset_img oO-console.png Fig1. `%o/O`格式化输出DOM %}
 
-## 1.2 `console.dir`
+## 1.2 `dir`
 
 同“1.1”中的`%O`输出。
 
-# 2. 断言`console.assert`
+# 2. 断言`cassert`
 
 ```js
 console.assert(expression, '当前面的表达式为false时，会输出这句话。');
 ```
 
-# 3. 分组`console.group/groupEnd/groupCollapsed`
+# 3. 分组`group/groupEnd/groupCollapsed`
 
 会自动收集`group`与`groupEnd`之间的所有日志，可以嵌套使用。
 
-```js
-console.group();
-```
 
-# 4. 表格`console.table`
+# 4. 表格`table`
+
+方便比较数组／对象中的内容。
 
 ```js
 var x = [{name:'jonge1', age:30, email:'h@jonge.club'}, {name:'jonge2', age:40, email:'j@jonge.club'}, {name:'jonge3', age:50}];
+console.table(x);
+console.table(x,['name', 'email']);
+```
+
+# 5. 计时（`time/timeEnd`）／计数（`count`）
+
+可以初始化一个字符串作为唯一识别码。
+
+```js
+console.time('Jonge\'s timer');
+// do sth.
+console.timeEnd('Jonge\'s timer');
+
+// 输出
+// Jonge's timer: 94.562744140625ms
+
+// 计数，比如记录某个函数被调用次数
+function test() {
+    console.count("test called cnt");
+}
+
+// 输出
+// test called cnt: 1
 ```
