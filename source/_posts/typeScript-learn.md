@@ -8,7 +8,7 @@ tags:
 ---
 
 >*因为这只是个人的学习笔记，不便之处望谅解。*
-
+>
 >**内容：** 基本类型、变量声明。
 
 # 1. 官网的5分钟快速入门
@@ -60,7 +60,7 @@ document.body.innerHTML = greeter(user);
 
 # 2. 玩法介绍
 
-## 2.2 基本类型
+## 2.1 基本类型
 
 ```ts
 // basics
@@ -136,7 +136,36 @@ let { a: newA, b: newB } = o; // 自定义变量名
 ({ a, b } = { a: "baz", b: 101 });
 ```
 
-* Spreading
+* Default Value
+
+```ts
+// ? means b can be undefined
+
+function f1(o: { a: string, b?: number }) {
+    let { a, b = 0 } = o;
+}
+
+f1({a: 'hh'}); // ok
+f1({a: 'hh', b: 'h'}); // error
+
+// a、b都必须
+function f2({ a, b } = { a: "", b: 0 }): void {
+    // ...
+}
+// a必须，b可选，同f1
+function f3({ a, b = 0 } = { a: ""}): void {
+    // ...
+}
+f2({}); // error, need a & b
+f2({a: 'h'}); // error, need b
+f2({a: 23}); // error, number cannot be assigned to string
+
+f3({}); // error, need a
+f3({a: 'h'}); // ok
+f3({a: 23}); // error, number cannot be assigned to string
+```
+
+* Spread
 
 ```ts
 let a = [1, 2], b = [3, 4];
