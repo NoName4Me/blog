@@ -358,4 +358,3 @@ class Location {
 
 1. [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook)
 
-2. 
