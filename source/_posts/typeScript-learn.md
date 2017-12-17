@@ -58,7 +58,7 @@ let user = new Student("Jonge", "M.", "Den");
 document.body.innerHTML = greeter(user);
 ```
 
-# 2. 玩法介绍
+# 2. 学习
 
 ## 2.1 基本类型
 
@@ -175,7 +175,7 @@ let o = {name: 'jonge', age: 29, addr: 'MTS'};
 let newO = {o, age: 30}; // newO = {name: 'jonge', age: 30, addr: 'MTS'}
 ```
 
-# 3. 接口
+## 2.3 接口
 
 ```ts
 function printLabel(labelledObj: { label: string }) {
