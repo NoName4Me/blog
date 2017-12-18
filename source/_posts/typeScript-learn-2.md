@@ -6,12 +6,16 @@ categories:
 tags:
 - TypeScript
 ---
-# 2. 学习
+>*因为这只是个人的学习笔记，不便之处望谅解。*
+>
+>**内容：** 类。
+
+# 2. 学习（接[上一篇](http://jonge.club/2017/12/16/typeScript-learn-1/))
 
 ## 2.3 类
 
 ### 2.3.1 继承
-
+<!--more-->
 ```ts
 class Animal {
     name: string;
