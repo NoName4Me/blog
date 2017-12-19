@@ -205,9 +205,9 @@ department.generateReports(); // error: method doesn't exist on declared abstrac
 
 * 实例的类的类型：`let c: MyClass`，`MyClass`是类`MyClass`的类型；
 
-* 构造器函数：`let c: MyClass = new MyClass()`时，由`new`引发。
+* 构造器函数：`let c: MyClass = new MyClass()`时，由`new`引发；
 
-* instance side和static side
+* instance side和static side：构造器里可以访问静态属性
 
 将类当作接口
 
