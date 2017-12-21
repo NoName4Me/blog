@@ -60,14 +60,8 @@ tags:
 </svg>
 {% endraw %}
 
-```html
+## 1.3 path
 
-
-
- 
-```
-
-## path
 > Capital Form: absolute, Lower Case: relative
 
 **M**ove to
@@ -102,7 +96,7 @@ preserveAspectRatio="xMinyMin meet"
 // slice: scaled and sliced untill the mallest side touch the viewport boundary
 ```
 
-## Constructure
+# 2. 高级知识
 
 * `<defs>` & `<symbol>` 
 ```html
@@ -147,10 +141,10 @@ refX,refY: the offset of X-axis, Y-axis
 
 <path d="M100,10 C200,40 300,10 400,50"  stroke="#3DA" marker-end="url(#arrow)" fill="none" stroke-width="2"/>
 ```
+
 `marker-end`, `marker-start`, `marker-end`(only display when polyline, path, polygon change direction)
 
-
-# 踩坑记
+# 3.踩坑记
 
 * 一个兼容SVG和IE的样式类操作（删／增）的工具函数
 
@@ -188,7 +182,7 @@ function svgElementClassTool(element, className, opt) {
 
 ```
 
-#  SVG js libs
+# 4. SVG库
 
 一开始没有选择d3.js库，而是手动撸原生，很失误。
 
