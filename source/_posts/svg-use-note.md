@@ -62,17 +62,57 @@ tags:
 
 ## 1.3 path
 
-> Capital Form: absolute, Lower Case: relative
+> 大写字母：相对于起点的绝对定位，小写：相对定位
 
-**M**ove to
-**L**ine to
-**H**orizontal line to
-**V**ertical line to
-clo**Z**e path
+|关键字|行为|说明|
+|----|----|---|
+|`M`|移动到|
+|`L`|绘制直线到|
+|`H`|绘制水平线到|
+|`V`|绘制垂直线到|
+|`Z`|闭合（绘制到起点）|
+|`A`|绘制弧线|`A30,40 0 0,0 70,70`: 画一个（从上一个点）到坐标(70,70)横轴30，纵轴40的逆时针小圆弧线|
+|`Q`|绘制二次贝塞尔曲线|
+|`C`|绘制三次贝塞尔曲线|
 
-**A**rc
-> A rx,ry rotation big/small-arcFlag,clock-wise flag
-`A30,40 0 0,0 70,70`: this means draw a small couter-clock-wise arc(rx=30,ry=40) to (70,70)
+
+```html
+<!-- 封闭折线 -->
+<path d="M50,50 L100,30 H150 V80 Z" stroke="#000" stroke-width="1" fill="none" marker-start="url(#start)"/>
+<!-- 不封闭折线 -->
+<path d="M60,60 L110,40 H160 V90" stroke="#000" stroke-width="1" fill="none" marker-start="url(#start)"/>
+<!-- 红色逆时针小圆弧 -->
+<path d="M220,40 A40,20 0 0,0 250,60" stroke="#f00" stroke-width="1" fill="none"/>
+<!-- 绿色逆时针大圆弧 -->
+<path d="M220,40 A40,20 0 1,0 250,60" stroke="#0f0" stroke-width="1" fill="none"/>
+<!-- 蓝色顺时针小圆弧 -->
+<path d="M220,40 A40,20 0 0,1 250,60" stroke="#00f" stroke-width="1" fill="none"/>
+<!-- 青色顺时针大圆弧 -->
+<path d="M220,40 A40,20 0 1,1 250,60" stroke="#0ff" stroke-width="1" fill="none" marker-start="url(#start)" marker-end="url(#end)"/>
+```
+
+{% raw %}
+<svg style="width:600px;height:100px;box-shadow:0 0 8px 0 rgba(0,0,0,.2);border:1px solid rgba(0,0,0,.1);">
+  <defs>
+    <marker viewBox="0 0 10 10" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto" markerUnits="strokeWidth" id="start">
+        <circle cx="5" cy="5" r="5" fill="#3A9" stroke="none"></circle>
+    </marker>
+    <marker viewBox="0 0 10 10" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto" markerUnits="strokeWidth" id="end">
+        <circle cx="5" cy="5" r="5" fill="#A39" stroke="none"></circle>
+    </marker>
+  </defs>
+  <path d="M10,15 L10,15" marker-start="url(#start)"/>
+  <text x="20" y="20">起点</text>
+  <path d="M60,15 L10,15" marker-start="url(#end)"/>
+  <text x="70" y="20">终点</text>
+  <path d="M50,50 L100,30 H150 V80 Z" stroke="#000" stroke-width="1" fill="none" marker-start="url(#start)"/>
+  <path d="M60,60 L110,40 H160 V90" stroke="#000" stroke-width="1" fill="none" marker-start="url(#start)"/>
+  <path d="M220,40 A40,20 0 0,0 250,60" stroke="#f00" stroke-width="1" fill="none"/>
+  <path d="M220,40 A40,20 0 1,0 250,60" stroke="#0f0" stroke-width="1" fill="none"/>
+  <path d="M220,40 A40,20 0 0,1 250,60" stroke="#00f" stroke-width="1" fill="none"/>
+  <path d="M220,40 A40,20 0 1,1 250,60" stroke="#0ff" stroke-width="1" fill="none" marker-start="url(#start)" marker-end="url(#end)"/>
+</svg>
+{% endraw %}
 
 Bezier Curves
 **Q**uadratic Bezier Curves
