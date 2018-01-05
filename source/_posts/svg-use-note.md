@@ -62,7 +62,7 @@ tags:
 
 ## 1.3 path
 
-> 大写字母：相对于起点的绝对定位，小写：相对定位
+> 大写字母：相对于起点的定位，小写：相对前一个点的定位
 
 |关键字|行为|说明|
 |----|----|---|
@@ -71,10 +71,11 @@ tags:
 |`H`|绘制水平线到||
 |`V`|绘制垂直线到||
 |`Z`|闭合（绘制到起点）||
-|`A`|绘制弧线|`A30,40 0 0,0 70,70`: 画一个（从上一个点）到坐标(70,70)横轴30，纵轴40的逆时针小圆弧线|
-|`Q`|绘制二次贝塞尔曲线||
-|`C`|绘制三次贝塞尔曲线||
-
+|`A`|弧线|`A30,40 0 0,0 70,70`: 画一个（从上一个点）到坐标(70,70)横轴30，纵轴40的逆时针小圆弧线|
+|`Q`|二次贝塞尔曲线|`Q10,100 40,200`画一个（从上一个点）到坐标(40,200)的以(10,100)为控制点的贝塞尔曲线|
+|`T`|二次贝塞尔简写|`T40,200`画一个（从上一个点）到坐标(40,200)的以上一个控制点为控制点的贝塞尔曲线|
+|`C`|三次贝塞尔曲线|`C10,40 50,80 100，100`画一个（从上一个点）到坐标(100,100)的以(10,40)和(50,80)为第一、第二控制点的曲线|
+|`S`|三次贝塞尔曲线简写|`S50,80 100，100`类似`T`，第一个控制点省略（使用上一个）|
 
 ```html
 <!-- 封闭折线 -->
@@ -89,6 +90,10 @@ tags:
 <path d="M220,40 A40,20 0 0,1 250,60" stroke="#00f" stroke-width="1" fill="none"/>
 <!-- 青色顺时针大圆弧 -->
 <path d="M220,40 A40,20 0 1,1 250,60" stroke="#0ff" stroke-width="1" fill="none" marker-start="url(#start)" marker-end="url(#end)"/>
+<!-- 二次贝塞尔 -->
+<path d="M320,40 Q340,10 350,60" stroke="grey" stroke-width="1" fill="none" marker-start="url(#start)" marker-end="url(#end)"/>
+<!-- 三次贝塞尔 -->
+<path d="M320,80 C320,120 420,10 480,50" stroke="grey" stroke-width="1" fill="none" marker-start="url(#start)" marker-end="url(#end)"/>
 ```
 
 {% raw %}
@@ -111,17 +116,12 @@ tags:
   <path d="M220,40 A40,20 0 1,0 250,60" stroke="#0f0" stroke-width="1" fill="none"/>
   <path d="M220,40 A40,20 0 0,1 250,60" stroke="#00f" stroke-width="1" fill="none"/>
   <path d="M220,40 A40,20 0 1,1 250,60" stroke="#0ff" stroke-width="1" fill="none" marker-start="url(#start)" marker-end="url(#end)"/>
+  <path d="M320,40 Q340,10 350,60" stroke="grey" stroke-width="1" fill="none" marker-start="url(#start)" marker-end="url(#end)"/>
+  <path d="M320,80 C320,120 420,10 480,50" stroke="grey" stroke-width="1" fill="none" marker-start="url(#start)" marker-end="url(#end)"/>
 </svg>
 {% endraw %}
 
-Bezier Curves
-**Q**uadratic Bezier Curves
-Qcx,cy x,y: cx,cy is control point, x,y is end point
-Tx,y: control point is last used control point
 
-**C**ubic Bezier Curves
-Ccx1,cy1 cx2,cy2 x,y: 2 control points
-Scx,cy x,y: first control point is assumed to be the last used point
 
 ## Coordinate
 viewBox=minX,minY width,height
@@ -138,51 +138,59 @@ preserveAspectRatio="xMinyMin meet"
 
 # 2. 高级知识
 
-* `<defs>` & `<symbol>` 
+* `<defs>` & `<symbol>`：定义
+* `<marker>`：标记
+* `<use>`：引用
+
+>可以使用viewBox来scale/transform
+
+refX／refY：X／Y轴的偏移
+`marker-end`, `marker-start`, `marker-mid`(多节点的线才会有效，即至少3个点）
+
 ```html
 <defs>
-    <linearGradient id="gradient">
-      <stop offset="20%" stop-color="#3D9" />
-      <stop offset="90%" stop-color="#39F" />
-    </linearGradient>
+  <!-- 渐变 -->
+  <linearGradient id="g1">
+    <stop offset="20%" stop-color="#3D9" />
+    <stop offset="90%" stop-color="#39F" />
+  </linearGradient>
+  <!--  W|H * markerUnits 计算实际大小 -->
+  <marker viewBox="0 0 10 10" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth" id="arrow">
+    <path d="M0,0 L0,6 L9,3 Z" fill="#3A9"></path>
+  </marker>
 </defs>
-
 <symbol>
-    <linearGradient id="gradient">
+  <circle cx="50" cy="50" r="20" stroke-width="18" stroke="orange" fill="purple" id="r1"/>
+</symbol>
+<!-- 引用上面的定义 -->
+<circle cx="50" cy="50" r="30" fill="url(#g1)"/>
+<use x="110" y="0" xlink:href="#r1" stroke="orange" stroke-width="5" />
+<path d="M240,20 C180,40 360,50 320,80" stroke="grey" marker-end="url(#arrow)" fill="none" stroke-width="2" />
+<!-- marker-mid -->
+<path d="M260,20 H300 V60" stroke="grey" marker-end="url(#arrow)" fill="none" stroke-width="1" marker-mid="url(#arrow)"/>
+```
+
+{% raw %}
+<svg style="width:400px;height:100px;box-shadow:0 0 8px 0 rgba(0,0,0,.2);border:1px solid rgba(0,0,0,.1);">
+  <defs>
+    <linearGradient id="g1">
       <stop offset="20%" stop-color="#3D9" />
       <stop offset="90%" stop-color="#39F" />
     </linearGradient>
-</symbol>
-
-<!-- reference to the defined element -->
-<g>
-    <circle r="20" cx="50" cy="50" fill="url(#gradient)"></circle>
-</g>
-```
-
-* `<use>`
-```html
-<use x="0" y="0" xlink:href="#element" fill="#f00" stroke="orange" stroke-width="5px" />
-```
-
-
-* `<marker>`
->you can use viewBox for scale/transform
-
-refX,refY: the offset of X-axis, Y-axis
-```html
-<defs>
-<!-- basic W|H * markerUnits assignedKey's Value-->
-    <marker markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth" id="arrow">
-        <path d="M0,0 L0,6 L9,3 Z" fill="#3A9"></path>
+    <!--  W|H * markerUnits 计算实际大小 -->
+    <marker viewBox="0 0 10 10" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth" id="arrow">
+      <path d="M0,0 L0,6 L9,3 Z" fill="#3A9"></path>
     </marker>
-</defs>
-
-
-<path d="M100,10 C200,40 300,10 400,50"  stroke="#3DA" marker-end="url(#arrow)" fill="none" stroke-width="2"/>
-```
-
-`marker-end`, `marker-start`, `marker-end`(only display when polyline, path, polygon change direction)
+  </defs>
+  <symbol>
+    <circle cx="50" cy="50" r="20" stroke-width="18" stroke="orange" fill="purple" id="r1"/>
+  </symbol>
+  <circle cx="50" cy="50" r="30" fill="url(#g1)"/>
+  <use x="110" y="0" xlink:href="#r1" stroke="orange" stroke-width="5" />
+  <path d="M240,20 C180,40 360,50 320,80" stroke="grey" marker-end="url(#arrow)" fill="none" stroke-width="2" />
+  <path d="M260,20 H300 V60" stroke="grey" marker-end="url(#arrow)" fill="none" stroke-width="1" marker-mid="url(#arrow)"/>
+</svg>
+{% endraw %}
 
 # 3.踩坑记
 
@@ -218,9 +226,40 @@ function svgElementClassTool(element, className, opt) {
     element.setAttribute("class", oldClassList.join(" "));
   }
 }
-
-
 ```
+
+* svg内可编辑文本
+
+原本以为下面几行代码就搞定收工了，结果又一次忘记了**兼容**。
+```html
+<svg width="300" height="100" style="padding:10px;box-shadow: 0 0 8px 0 rgba(0,0,0,.2);">
+  <foreignObject requiredExtensions="http://www.w3.org/1999/xhtml">
+    <!-- XHTML content goes here -->
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <input value="hi~input." />
+      <textarea>hi~textarea.</textarea>
+    </div>
+  </foreignObject>
+</svg>
+```
+
+效果（IE不可见^_^）：
+
+{% raw %}
+<svg width="300" height="100" style="padding:10px;box-shadow: 0 0 8px 0 rgba(0,0,0,.2);">
+
+  <foreignObject requiredExtensions="http://www.w3.org/1999/xhtml" x="10" y="10">
+    <!-- XHTML content goes here -->
+    <body xmlns="http://www.w3.org/1999/xhtml">
+      <input value="hi~input." />
+      <textarea>hi~textarea.</textarea>
+    </body>
+  </foreignObject>
+</svg>
+{% endraw %}
+
+又是傲娇的IE不支持`<foreignObject>`。最终怎么解决的呢：在`<svg>`标签外，用绝对定位并与svg内元素保持交互同步。（感觉又给自己挖下了一个很深的坑呢— —||）。
+
 
 # 4. SVG库
 
