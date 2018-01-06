@@ -233,10 +233,9 @@ function svgElementClassTool(element, className, opt) {
 原本以为下面几行代码就搞定收工了，结果又一次忘记了**兼容**。
 ```html
 <svg width="300" height="100" style="padding:10px;box-shadow: 0 0 8px 0 rgba(0,0,0,.2);">
-  <foreignObject requiredExtensions="http://www.w3.org/1999/xhtml">
-    <!-- XHTML content goes here -->
+  <foreignObject width="100" height="150">
     <div xmlns="http://www.w3.org/1999/xhtml">
-      <input value="hi~input." />
+      <input value="hi~input.">
       <textarea>hi~textarea.</textarea>
     </div>
   </foreignObject>
@@ -247,13 +246,11 @@ function svgElementClassTool(element, className, opt) {
 
 {% raw %}
 <svg width="300" height="100" style="padding:10px;box-shadow: 0 0 8px 0 rgba(0,0,0,.2);">
-
-  <foreignObject requiredExtensions="http://www.w3.org/1999/xhtml" x="10" y="10">
-    <!-- XHTML content goes here -->
-    <body xmlns="http://www.w3.org/1999/xhtml">
-      <input value="hi~input." />
+  <foreignObject width="100" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <input value="hi~input.">
       <textarea>hi~textarea.</textarea>
-    </body>
+    </div>
   </foreignObject>
 </svg>
 {% endraw %}
