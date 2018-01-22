@@ -12,9 +12,12 @@ tags:
 
 {% asset_img Event.png Fig1. Events in This Post %}
 
+<!-- more -->
+
 # 1. MouseEvent
 
 ## 1.1 鼠标悬浮
+
 一共有两对，`mouseenter`/`mouseleave`和`mouseover`/`mouseout`，两者的区别如下：
 1. 后者会事件冒泡，前者只会出发当前层，而冒泡的好处在于只会被触发一次（层级较深时能有效减少开销）；
 2. mouseleave与mouseout，后者在离开子层（即使仍然在范围内）也会触发事件，前者不会。
@@ -26,7 +29,7 @@ tags:
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 {% endraw %}
 
-<!-- more -->
+
 
 ## 1.2 鼠标点击
 
@@ -88,3 +91,42 @@ tags:
 <p data-height="265" data-theme-id="dark" data-slug-hash="POERXz" data-default-tab="result" data-user="blurnull" data-embed-version="2" data-pen-title="combined-key" data-preview="true" class="codepen">See the Pen <a href="https://codepen.io/blurnull/pen/POERXz/">combined-key</a> by BlurNull (<a href="https://codepen.io/blurnull">@blurnull</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 {% endraw %}
+
+# 3. 其它
+
+## 3.1 绑定事件
+
+除了常见的在html里用`onXx="eventProcess()"`绑定js中定义的函数外，还可以在js中查询元素，然后绑定事件，比如`document.querySelector("#aBtn").onclick = function btnClick(){}`，或者`addEventLister()`来绑定。
+
+### 3.1.1 `addEventListener()`
+
+`target.addEventListener(type, listener[, options]);`
+|参数|说明|
+|----|----|
+|`type`|类型，大小写敏感|
+|`listener`|当特定`type`事件发生时，此`listener`会收到通知，必须是JS函数，或者实现了`EventListener`接口的对象|
+|`options`|可选，有`capture`（表示这种`type`的事件是否会在派发到注册的`listener`之前被派发给其它任何在DOM树结构上次于它的`EventTarget`）、`once`（是否只在添加之后只会激活一次，`true`代表在激活后会自动移除注册的`listener`）、`passive`（表示`listener`永远也不会调用`preventDefault()`，如果调用了，那么它会忽略，并在console显示警告信息，查看[Improving scrolling performance with passive listeners](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Improving_scrolling_performance_with_passive_listeners)了解更多）|
+
+其它参数感兴趣可以查看[DOC](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)。
+
+`target.addEventListener(type, listener[, useCapture]);`
+
+## 3.2 自定义事件
+
+一般可以通过类似下面这种套路来定义／绑定／派发事件，带参数的事件可以参考[CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent)，当然，你也可以自定义特定事件，比如`new MouseEvent('')`。
+
+```js
+// 创建事件
+var event = new Event('build');
+// 旧时代使用的创建及初始化方法
+// var event = document.createEvent('Event');
+// event.initEvent('build', true, true);
+
+// 监听事件
+elem.addEventListener('build', function (e) { ... }, false);
+
+// 派发事件
+elem.dispatchEvent(event);
+```
+
+**注意**：`dispatchEvent`是事件创建、初始化、派发的最后一步，如果该事件是可取消的且已经被至少一个Event handler处理过，就会返回`false`，否则返回`true`，点击查看[dispatchEvent DEMO](https://developer.mozilla.org/samples/domref/dispatchEvent.html)。
