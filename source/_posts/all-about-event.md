@@ -14,6 +14,18 @@ tags:
 
 <!-- more -->
 
+# 0. 事件派发和传播
+
+一个事件可以通过`dispatchEvent()`来派发，事件对象（object）通过DOM事件流（flow）来沿着事件传播路径（propagation path）传递给事件目标（target）。在派发前，先要决定传播路径，然后会经历事件一个或多个阶段。事件阶段有三个（如下图所示）：捕获阶段、定位阶段、冒泡阶段。如果`bubbles`被取消，那么就会跳过冒泡阶段，如果在派发之前调用了`stopPropogation()`，那么所有的阶段都会被跳过。
+
+* 捕获阶段（capture phase）：事件对象从`Window`传递到事件目标的父元素。
+* 定位阶段（target phase）：事件对象到达事件目标，如果设置了不冒泡，那么就会在此阶段完成后停止。
+* 冒泡阶段（bubble phase）：事件对象从事件目标的父元素传递回`Window`。
+
+图：DOM树中的事件派发说明
+
+![img](https://www.w3.org/TR/DOM-Level-3-Events/images/eventflow.svg)
+
 # 1. MouseEvent
 
 ## 1.1 鼠标悬浮
@@ -100,7 +112,8 @@ tags:
 
 ### 3.1.1 `addEventListener()`
 
-`target.addEventListener(type, listener[, options]);`
+* `target.addEventListener(type, listener[, options]);`
+
 |参数|说明|
 |----|----|
 |`type`|类型，大小写敏感|
@@ -109,7 +122,11 @@ tags:
 
 其它参数感兴趣可以查看[DOC](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)。
 
-`target.addEventListener(type, listener[, useCapture]);`
+* `target.addEventListener(type, listener[, useCapture]);`
+
+`userCapture`参数与`optons`中的`capture`一样。
+
+两个知识点：[JavaScript Events Order](https://www.quirksmode.org/js/events_order.html#link4)、[DOM Level 3 Events](https://www.w3.org/TR/DOM-Level-3-Events/#event-flow)
 
 ## 3.2 自定义事件
 
