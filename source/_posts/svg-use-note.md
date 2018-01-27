@@ -150,7 +150,7 @@ refX／refY：X／Y轴的偏移
 ```html
 <defs>
   <!-- 渐变 -->
-  <linearGradient id="g1">
+  <linearGradient id="g1"><!-- x1="0%" y1="0%" x2="0%" y2="100%"这个决定了渐变角度，此时是垂直向下 -->
     <stop offset="20%" stop-color="#3D9" />
     <stop offset="90%" stop-color="#39F" />
   </linearGradient>
@@ -262,6 +262,44 @@ function svgElementClassTool(element, className, opt) {
 代码中使用了`ng-repeat`来将一组元素映射为dom，但是在交互中遇到如果删除了repeat中的元素，原来解析出来的dom如果有新设置的样式或类，会保留下来，所以很诡异的现象：明明从页面上删除了某个元素，但是它的样式却传递给了上一个元素，如果各个元素样式都不同，那么会出现样式错乱。
 
 解决：样式与元素一一对应，而不是依赖元素位置。或者删除元素前先恢复该元素的样式到默认样式。
+
+## 3.4 线条太细，hover太难触发
+
+这个其实不算是坑，只是个小solution罢了，思路就是放置一条比较粗的重叠线，描边颜色是透明的就行。下面的例子为了说明，有效`hover`区域给成了`20px`，实际自己取舍。
+
+```html
+<svg style="width:400px;height:100px;box-shadow:0 0 8px 0 rgba(0,0,0,.2);border:1px solid rgba(0,0,0,.1);">
+<style>
+.line-group:hover .true-line { stroke: #C93; stroke-width: 4px; }
+.line:hover { stroke: #C93; }
+</style>
+<text x="30" y="30">设置了hover范围的线</text>
+  <g class="line-group">
+    <path class="true-line" d="M50,50 h100" stroke="#39C" fill="none" stroke-width="2"></path>
+    <path d="M50,50 h100" stroke="rgba(0,0,0,0)" fill="none" stroke-width="20"></path>
+  </g>
+  <text x="220" y="30">普通的线</text>
+  <path class="line" d="M200,50 h100" stroke="#39C" fill="none" stroke-width="2"></path>
+</svg>
+```
+
+效果如下：
+{% raw %}
+<svg style="width:400px;height:100px;box-shadow:0 0 8px 0 rgba(0,0,0,.2);border:1px solid rgba(0,0,0,.1);">
+<style>
+.line-group:hover .true-line { stroke: #C93; stroke-width: 4px; }
+.line:hover { stroke: #C93; }
+</style>
+<text x="30" y="30">设置了hover范围的线</text>
+  <g class="line-group">
+    <path class="true-line" d="M50,50 h100" stroke="#39C" fill="none" stroke-width="2"></path>
+    <path d="M50,50 h100" stroke="rgba(0,0,0,0)" fill="none" stroke-width="20"></path>
+  </g>
+  <text x="220" y="30">普通的线</text>
+  <path class="line" d="M200,50 h100" stroke="#39C" fill="none" stroke-width="2"></path>
+</svg>
+{% endraw %}
+
 # 4. SVG库
 
 一开始没有选择d3.js库，而是手动撸原生，很失误。
