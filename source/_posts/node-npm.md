@@ -6,7 +6,6 @@ categories:
 tags:
 - npm
 ---
-
 # 1. 基本知识
 
 ## 1.1 安装
@@ -16,7 +15,7 @@ tags:
 window直接[官网](https://nodejs.org)下载安装即可。
 
 其它环境及安装方式见：https://nodejs.org/en/download/package-manager/
-
+<!-- more -->
 * npm安装依赖包
 
 ```bash
