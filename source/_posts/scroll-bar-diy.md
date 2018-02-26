@@ -19,6 +19,8 @@ webkit内核的浏览器支持使用CSS自定义滚动条，IE仅支持颜色修
 // 3. 可选：jQuery实现（使用mCustomScrollbar）
 ```
 
+<!--more-->
+
 # 1. 自己实现
 
 先看效果：
