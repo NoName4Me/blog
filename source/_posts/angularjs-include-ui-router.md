@@ -8,7 +8,6 @@ tags:
 - 路由
 ---
 
-
 做页面，经常会遇到这样的需求：
 
 1. 页面太大，需要分割；
@@ -16,11 +15,45 @@ tags:
 
 在angular框架前提下，第1点一般通过`ng-include`来实现（不存在传递参数、不同状态不同显示等问题），所以多用于页眉／页脚／静态页。第2点一般用`ui-router`来控制。
 
+待续。
+
+<!--more-->
+
 `ng-include`和`ui-router`
 
-
-
 ## `ui-router`
+
+### 基础知识
+
+* router最小单位：
+
+```html
+<!-- in index.html -->
+<body ng-controller="MainCtrl">
+  <section ui-view></section>
+</body>
+```
+
+```js
+// in app-states.js (or whatever you want to name it)
+$stateProvider.state('contacts', {
+  template: '<h1>My Contacts</h1>'
+})
+```
+
+激活一个状态有三种方式：
+
+* 调用`$state.go()`
+* 点击一个包含`ui-sref`指令的链接
+* 访问绑定了状态的url
+
+也可以给`ui-view`设置默认显示的内容:
+
+```html
+<ui-view>
+    <i>Some content will load here!</i>
+</ui-view>
+```
 
 ### `url`传参
 
@@ -41,8 +74,6 @@ $state.go('state1', {say: 'hi~'}); // 或通过访问url`test/hi~/`传入参数
 $stateParameter.say;
 $state.params; // 这个能获取到子状态的参数
 ```
-
-**注意**：0.2.10版本前不支持$state.go()传递对象参数。
 
 ### 直接状态带参
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.js"></script>
+    <script src="https://unpkg.com/@uirouter/angularjs@1.0.15/release/angular-ui-router.js"></script>
+    <script src="./script.js"></script>
+    <title>angularjs-ui-router</title>
+</head>
+
+<body>
+    <div ng-app="root">
+        <div ng-controller="basic.ctrl">
+            <a ui-sref="hello" ui-sref-active="active">Hello</a>
+            <a ui-sref="about" ui-sref-active="active">About</a>
+            <a ui-sref="hello.jonge" ui-sref-active="active">Say</a>
+
+            <ui-view>
+                <div>
+                    <a ui-sref="url.state" ui-sref-active="active">Say</a>
+                    <ui-view></ui-view>
+                </div>
+            </ui-view>
+        </div>
+    </div>
+</body>
+
+</html>
