@@ -102,7 +102,7 @@ $stateProvider.state({
 结果展示：
 
 {% raw %}
-<img src="https://github.com/NoName4Me/blog/blob/master/source/_posts/angularjs-include-ui-router/ui-router-view-nest.png" width="400px" alt="Fig1. ui-view嵌套">
+<img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/angularjs-include-ui-router/ui-router-view-nest.png" width="400px" alt="Fig1. ui-view嵌套">
 {% endraw %}
 
 关键代码：
@@ -120,7 +120,7 @@ $stateProvider.state({
 结果展示：
 
 {% raw %}
-<img src="https://github.com/NoName4Me/blog/blob/master/source/_posts/angularjs-include-ui-router/ui-router-multi-named-views.png" width="400px" alt="Fig1. ui-view嵌套">
+<img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/angularjs-include-ui-router/ui-router-multi-named-views.png" width="400px" alt="Fig1. ui-view嵌套">
 {% endraw %}
 
 源码摘要：
