@@ -8,9 +8,13 @@ tags:
 - animation
 ---
 
+> TODO `filter`稍微了解一下下。
+
 # 1. 波浪效果
 
-通过圆角矩形的旋转，并遮挡部分内容来实现。
+通过半径小于宽度`50%`（**注意**不能太小，否则不够平滑）的圆角矩形旋转，并遮挡部分内容来实现。
+
+<!--more-->
 
 ```scss
 // 动画定义
@@ -42,13 +46,14 @@ tags:
 
 # 2. 水滴粘黏效果
 
-这种效果的关键就在于水滴之间的连接是圆润平滑的，如下图所示。
+这种效果的关键就在于水滴之间的连接是圆润平滑的，如下图所示（绿色曲线衔接）。
+<img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/css-wave-sticky-water/css-sticky-key-point.jpeg" width="360" >
 
 那么问题来了，在CSS里如何实现这种效果呢？有个变换叫`fitler`，^__^。
 
 原理且先不讨论，我们看一下PS里高斯模糊然后高对比度的效果：
 
-<img src="" >
+<img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/css-wave-sticky-water/ps-blur-contrast.png" width="360" >
 
 css里就是借助`filter: blur()`和`filter: contrast()`。
 
