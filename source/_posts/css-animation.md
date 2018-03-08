@@ -12,6 +12,8 @@ tags:
 
 最近在做[100 Days CSS chalenges](https://codepen.io/collection/XgmakG/)练习时，发现animation这部分知识原来并没有整体的学过，于是有了这篇学习笔记。
 
+## 引用动画
+
 这个属性一共有8个子属性，取值（第一个是默认值）如下：
 <!---more-->
 * `animation-name`: `none`
@@ -38,3 +40,26 @@ animation-iteration-count: 2, 1;
 <p data-height="265" data-theme-id="dark" data-slug-hash="rJRbJz" data-default-tab="css,result" data-user="blurnull" data-embed-version="2" data-pen-title="animation-demo" class="codepen">See the Pen <a href="https://codepen.io/blurnull/pen/rJRbJz/">animation-demo</a> by BlurNull (<a href="https://codepen.io/blurnull">@blurnull</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 {% endraw %}
+
+## 定义动画
+
+```scss
+@keyframes xx {
+    from {
+        // 设置CSS样式
+    }
+    to {}
+}
+
+//上面的就相当于
+@keyframes xx {
+    0% {}
+    100% {}
+}
+
+// 当然你可以定义几个帧安全一样
+@keyframes xx {
+    0%, 20% {}
+    100% {}
+}
+```
