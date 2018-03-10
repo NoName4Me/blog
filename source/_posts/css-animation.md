@@ -8,16 +8,15 @@ tags:
 - animation
 ---
 
-# animation
-
 最近在做[100 Days CSS chalenges](https://codepen.io/collection/XgmakG/)练习时，发现animation这部分知识原来并没有整体的学过，于是有了这篇学习笔记。
 
-## 引用动画
+# 1. 引用动画
 
+# 1.1 基础
 这个属性一共有8个子属性，取值（第一个是默认值）如下：
 <!---more-->
 * `animation-name`: `none`
-* `animation-timing-function`: `ease`
+* `animation-timing-function`: `ease`，可取贝塞尔曲线、帧函数`frame()`，步进函数`steps()`，具体见`1.2`节。
 * `animation-duration`: `0s`，即使是`0`也要带单位哦，还支持`ms`
 * `animation-delay`: `0s`
 * `animation-iteration-count`: 1，可取`infinite`无限循环，可以取多值`1,2,3`，每当动画播放，会顺序的循环取用该多值；
@@ -41,7 +40,35 @@ animation-iteration-count: 2, 1;
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 {% endraw %}
 
-## 定义动画
+## 1.2 动画时间函数说明
+
+`animation-timing-function`已定义好的关键值如下：
+
+* `ease`: `cubic-bezier(0.25, 0.1, 0.25, 1)`
+* `ease-in`: `cubic-bezier(0.42, 0, 1, 1)`
+* `ease-out`: `cubic-bezier(0, 0, 0.58, 1)`
+* `ease-in-out`: `cubic-bezier(0.42, 0, 0.58, 1)`
+* `linear`: `cubic-bezier(0, 0, 1, 1)`
+* `step-start`: `steps(1, start)`
+* `step-end`: `steps(1, end)`
+
+动画的时间函数如下图所示（图中为`ease-in`时间函数），这个其实很简单，就是指定给动画的时间（`animation-duration`），和真实的动画持续时间的关系。
+
+<img src="https://drafts.csswg.org/css-timing-1/timing-function-example.svg" alt="cubic-bezier curve" style="box-shadow:0 2px 16px rgba(0,0,0,.4);width: 400px;border-radius:2px;">
+
+三个关键的时间函数为：
+
+* `cubic-bezier()`: 如下图示例，曲线的参数对应其实是P1和P2的坐标值(x1, y1, x2, y2)
+
+<img src="https://drafts.csswg.org/css-timing-1/cubic-bezier-timing-curve.svg" alt="cubic-bezier curve" style="box-shadow:0 2px 16px rgba(0,0,0,.4);width: 400px;border-radius:2px;">
+
+* `frames()`：感觉这个和`steps()`一样啊-__-||
+
+* `steps()`: 第一个参数是指将输入时间均分为几个步骤，第二个参数，感觉就是步骤切换是在刚进入到该步时（`start`），还是该步结束时要进入下一步前（`end`）。
+
+<img src="https://drafts.csswg.org/css-timing-1/step-timing-func-examples.svg" alt="步进函数" style="box-shadow:0 2px 16px rgba(0,0,0,.4);width: 400px;border-radius:2px;">
+
+# 2. 定义动画
 
 ```scss
 @keyframes xx {
@@ -63,3 +90,9 @@ animation-iteration-count: 2, 1;
     100% {}
 }
 ```
+
+------
+
+# 参考
+
+1. W3C CSS Animation Function: https://drafts.csswg.org/css-timing-1/
