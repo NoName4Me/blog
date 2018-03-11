@@ -1,5 +1,5 @@
 ---
-title: CSS实现水的波浪和粘黏效果
+title: CSS实现波浪和水滴粘黏效果
 date: 2018-03-07 20:48:46
 categories:
 - 前端
