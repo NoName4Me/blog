@@ -10,7 +10,9 @@ tags:
 
 # 1. 安装及编译
 
-Ruby、Sass（gem install sass）
+* Ruby、Sass（`gem install sass`）
+
+* nodejs (`npm install node-sass`)
 
 ```bash
 # .scss（同.sass）
