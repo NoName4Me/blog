@@ -39,7 +39,7 @@ tags:
 
 *注：一般元素的背面是其正面的镜像。*
 
-`transform-style`：`perserve-3d`会让内部元素拥有3D布局（见下方示例的图1：平面布局下元素X轴旋转45度，图2：3D布局下元素X轴旋转45度），可以看到图2中，圆形的一半（旋转到z=0平面后的部分）会被遮挡（清晰起见，用了半透明效果）
+`transform-style`：`preserve`会让内部元素拥有3D布局（见下方示例的图1：平面布局下元素X轴旋转45度，图2：3D布局下元素X轴旋转45度），可以看到图2中，圆形的一半（旋转到z=0平面后的部分）会被遮挡（清晰起见，用了半透明效果）
 
 {% raw %}
 <p data-height="240" data-theme-id="dark" data-slug-hash="ZxyEWz" data-default-tab="result" data-user="blurnull" data-embed-version="2" data-pen-title="CSS-3D-demo-03" class="codepen">See the Pen <a href="https://codepen.io/blurnull/pen/ZxyEWz/">CSS-3D-demo-03</a> by BlurNull (<a href="https://codepen.io/blurnull">@blurnull</a>) on <a href="https://codepen.io">CodePen</a>.</p>
