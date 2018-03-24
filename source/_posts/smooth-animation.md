@@ -26,6 +26,8 @@ tags:
 
 # 2. 实例分析
 
+演示代码获取：[点击这里](https://github.com/NoName4Me/blog/tree/master/source/_posts/smooth-animation/code)。
+
 ## 2.1 利用Chrome DevTool的`Performance`分析问题
 
 那么在实际开发中，我们如何进行调优？下面通过Chrome DevTool下的`Performance`中的功能进行演示：
@@ -34,7 +36,7 @@ tags:
 
 在顶部的图标里，从上到下依次为FPS、CPU、NET的表现，我们关注FPS，如果出现红色，说明一秒的帧数过少，有卡顿，红色下面绿色代表FPS，越高说明性能越好。
 
-<img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/smooth-animation/performance.png" width=480>
+<img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/smooth-animation/performance.png" width=560>
 
 如果录制时间较长，我们可以点击具体有问题的部分深入分析，图中Main（第2个蓝色框里）中显示了具体的事件，可以看到耗时的地方出在了JS的处理中（黄色是脚本耗时，紫色是渲染耗时），从上到下为JS的调用栈（图中可以看到问题出在了`mousemove`事件中调用某个函数时），我们选中最下面的（源头），查看图中第3个蓝框里的内容，点击`script.js`进入到具体代码执行分析，其它tab里的东西感兴趣可以自己了解。
 
