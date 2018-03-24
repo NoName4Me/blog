@@ -34,13 +34,13 @@ tags:
 
 在顶部的图标里，从上到下依次为FPS、CPU、NET的表现，我们关注FPS，如果出现红色，说明一秒的帧数过少，有卡顿，红色下面绿色代表FPS，越高说明性能越好。
 
-<img src="" width=540>
+<img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/smooth-animation/performance.png" width=480>
 
 如果录制时间较长，我们可以点击具体有问题的部分深入分析，图中Main（第2个蓝色框里）中显示了具体的事件，可以看到耗时的地方出在了JS的处理中（黄色是脚本耗时，紫色是渲染耗时），从上到下为JS的调用栈（图中可以看到问题出在了`mousemove`事件中调用某个函数时），我们选中最下面的（源头），查看图中第3个蓝框里的内容，点击`script.js`进入到具体代码执行分析，其它tab里的东西感兴趣可以自己了解。
 
 代码执行耗时分析如下，可以看到是这个`delay()`函数比较耗时引起的，这里只是为了示例所以用了循环来主动耗时，实际开发中什么神奇的代码都会有，具体问题具体分析。
 
-<img src="" width=540>
+<img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/smooth-animation/code-analyze.png" width=480>
 
 这种在频繁需要更新页面的事件里，大规模并不直接相关的计算应该避免或异步处理。
 
