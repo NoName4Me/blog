@@ -9,6 +9,8 @@ tags:
 - JS
 ---
 
+*最近在做一个前端mock服务器的小工具（[点击这里了解](https://github.com/NoName4Me/light-mock-server)），在处理根据配置的数据生成mock文件时顺带学习了`nunjucks`，记录一下。*
+
 `nunjacks`这个模版引擎，虽然它是用于生成HTML，但是，我们可以利用它的模板语法来生成自己的文件。
 
 <!--more-->
