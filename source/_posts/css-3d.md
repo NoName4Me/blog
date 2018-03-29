@@ -48,7 +48,18 @@ tags:
 
 我们稍微扩展一下，两个同位置，同一大小的元素，一个旋转180度，如果设置两个元素不同的内容（颜色什么的），那么当两者同步旋转时（比如沿着X或Y轴），那么就会出现类似旋转硬币的效果，结合不同的视角或背景，就可以作出如上图4的效果（清晰起见，背景用了半透明，图3是静止状态下的样式）。
 
+# 3. 瞬间flat掉你的3D效果的几个坑
+// TODO
+有些CSS属性会影响3D效果，让原本炫酷的3D瞬间成为2D，下面来一一分解。
+
+## 3.1 `overflow: hidden`
+
+* 解决
+
+`transform: perspective(800px) rotateY(45deg)`
+
 -----
 # 参考
 
 1. `backface-visibility`及相关：https://developer.mozilla.org/en-US/docs/Web/CSS/backface-visibility
+2. CSS 3D不生效场景：https://css-tricks.com/things-watch-working-css-3d/
