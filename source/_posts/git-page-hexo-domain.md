@@ -42,6 +42,24 @@ tags:
 * 一些可能会用到的配置：
 1. 设置不解析某些源文件为博文，配置`_config.yml`中`skip_render: ['**/*.html', '**/*.js', '**/*.map']`
 
+## 3.1 自定义页面
+
+比如自定义分类页面：`hexo new page categories`，会在source目录下生成`categories`目录，其中有个`index.md`，修改其中的信息如下：
+
+```yml
+title: 分类
+date: 日期（默认会生成）
+type: "categories"（注意这个要和主题中设置的相匹配）
+comments: false（这个视自己情况定）
+```
+
+并在对应的主题配置中开启主页显示分类，以Next为例：
+
+```yml
+menu:
+  categories: /categories/
+```
+
 ## 4. 搜索（Algolia）
 
 博文一多，自己分类、标签不明确很容易把自己都弄迷路，所以`搜索吧，少年～`。
@@ -110,3 +128,5 @@ hypercomments_id: id
 {% asset_img hypercomments-test2.png Fig4. 评论效果 %}
 
 其它主题内置的评论插件看个人喜好按Doc去设置就可以。
+
+## 6. 自定义页面
