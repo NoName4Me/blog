@@ -14,6 +14,8 @@ tags:
 
 ## 1.1 `border-radius`
 
+> **注意**`border-radius`一般直接影响背景的形状，而不是其中包含的元素（除非设置了`overflow:hidden`）。
+
 引用W3C上的一张图来说明：
 
 <img src="https://www.w3.org/TR/css-backgrounds-3/images/corner.png" width="300">

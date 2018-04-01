@@ -49,14 +49,27 @@ tags:
 我们稍微扩展一下，两个同位置，同一大小的元素，一个旋转180度，如果设置两个元素不同的内容（颜色什么的），那么当两者同步旋转时（比如沿着X或Y轴），那么就会出现类似旋转硬币的效果，结合不同的视角或背景，就可以作出如上图4的效果（清晰起见，背景用了半透明，图3是静止状态下的样式）。
 
 # 3. 瞬间flat掉你的3D效果的几个坑
-// TODO
+
 有些CSS属性会影响3D效果，让原本炫酷的3D瞬间成为2D，下面来一一分解。
 
 ## 3.1 `overflow: hidden`
 
+设置了`overflow:hidden`的元素，会把元素的3d属性（`transform-style: preserve-3d`）置为2d。
+
 * 解决
 
-`transform: perspective(800px) rotateY(45deg)`
+对于设置为3d的元素不直接设置`overflow:hidden;`，而是给其内部的子元素设置，如下示例第一行（图形1：没有设置`preserve-3d`；图形2：设置了：`preserve-3d`，图形3：并且设置了`overflow:hidden;`；图形4：给子元素设置`overflow:hidden;`）：
+
+{% raw %}
+<p data-height="363" data-theme-id="dark" data-slug-hash="Zxovmq" data-default-tab="css,result" data-user="blurnull" data-embed-version="2" data-pen-title="what-flat-3d-CSS" class="codepen">See the Pen <a href="https://codepen.io/blurnull/pen/Zxovmq/">what-flat-3d-CSS</a> by BlurNull (<a href="https://codepen.io/blurnull">@blurnull</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+{% endraw %}
+
+## 3.2 `clip-path`和`opacity`
+
+仍然看上一节的例子，如果在外层设置了3d属性的元素上使用这两个样式，也会导致3d失效，解决方式类似，将这两个属性应用到子元素上。
+
+示例见上节示例中的第2、3行。
 
 -----
 # 参考

@@ -143,7 +143,7 @@ git rm --cached xx
 git mv a a_backup
 ```
 
-# 2.2.3 `.gitignore`
+### 2.2.3 `.gitignore`
 
 添加`.gitignore`文件，文件内容规则如下
 |规则|说明|
