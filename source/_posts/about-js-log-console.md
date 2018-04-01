@@ -3,6 +3,7 @@ title: JS日志（console.xx）
 date: 2017-12-07 00:00:03
 categories:
 - 前端
+- JS
 tags:
 - 日志
 - console

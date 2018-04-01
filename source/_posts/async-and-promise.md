@@ -1,11 +1,14 @@
 ---
-title: 异步以及Promise（You don't know JS读书笔记）
+title: 异步以及Promise
 date: 2018-01-06 20:36:21
 tags:
 - 读书笔记
-- JS
+- async
+- promise
+- 异步
 categorie:
 - 前端
+- JS
 ---
 
 

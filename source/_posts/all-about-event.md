@@ -3,8 +3,8 @@ title: 前端常见Event总结（待续）
 date: 2017-11-12 21:51:35
 categories:
 - 前端
+- JS
 tags:
-- js
 - DomEvent
 ---
 

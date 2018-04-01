@@ -3,10 +3,10 @@ title: JS模版引擎（nunjucks）
 date: 2018-03-25 01:00:09
 categoried:
 - 前端
+- JS
 tags:
 - nunjucks
 - template engine
-- JS
 ---
 
 *最近在做一个前端mock服务器的小工具（[点击这里了解](https://github.com/NoName4Me/light-mock-server)），在处理根据配置的数据生成mock文件时顺带学习了`nunjucks`，记录一下。*

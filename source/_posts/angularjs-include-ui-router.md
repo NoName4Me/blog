@@ -3,6 +3,7 @@ title: angularjs页面分割和路由（ui-router)
 date: 2018-02-26 19:40:58
 categories:
 - 前端
+- JS
 tags:
 - angularjs
 - 路由

@@ -2,6 +2,10 @@
 title: ai-talker
 date: 2018-01-30 19:48:04
 tags:
+- AI
+- 人工智能
+categories:
+- JS
 ---
 
 # 先占坑。
