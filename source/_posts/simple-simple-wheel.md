@@ -65,8 +65,9 @@ tags:
 2. 在每个`$digest`循环周期里求表达式的值，直到值不再改变；
 3. 激活绑定在监听表达式上的观察器。
 
-
 ## 3.2 实现
+
+源码获取，[点击这里](https://github.com/NoName4Me/tiny-wheel)。
 
 ### 3.2.1 `Provider`
 
@@ -172,7 +173,7 @@ Provider.invoke(ctrl);
 var DOMCompiler = {
     bootstrap: function () {
       this.compile(document.children[0],
-        Provider.get('$rootScope'));
+        Provider.get('$rootScope')); // 还记得前面Provider._cache里默认生成的$rootScope么
     },
     compile: function (el, scope) {
       var dirs = this._getElDirectives(el);
@@ -180,20 +181,21 @@ var DOMCompiler = {
       var scopeCreated;
       dirs.forEach(function (d) {
         dir = Provider.get(d.name + Provider.DIRECTIVES_SUFFIX);
-        if (dir.scope && !scopeCreated) {
+        if (dir.scope && !scopeCreated) { // 是否需要创建作用域以及是否已创建
           scope = scope.$new();
           scopeCreated = true;
         }
-        dir.link(el, scope, d.value);
+        dir.link(el, scope, d.value); // 激活该指令定义的逻辑
       });
       Array.prototype.slice.call(el.children).forEach(function (c) {
         this.compile(c, scope);
       }, this);
     },
     _getElDirectives: function (el) {
-      var attrs = el.attributes;
+      var attrs = el.attributes; // 最开始有提到，只实现了属性方式的绑定，所以……
       var result = [];
       for (var i = 0; i < attrs.length; i += 1) {
+        // 查找是否是注册的指令
         if (Provider.get(attrs[i].name + Provider.DIRECTIVES_SUFFIX)) {
           result.push({
             name: attrs[i].name,
@@ -204,8 +206,186 @@ var DOMCompiler = {
       return result;
     }
 };
-
 ```
+
+### 3.2.3 `Scope`
+
+* `$watch(expr, fn)`：坚挺表达式 `expr`，一旦监测到值的改变，就用新的值激活回调函数 `fn`
+* `$destroy()`：销毁当前作用域
+* `$eval(expr)`：计算表达式 `expr` 在当前作用域下的值
+* `$new()`：创建一个新的作用域，原型继承调用者（的作用域）
+* `$digest()`：执行脏检查循环
+
+```js
+function Scope(parent, id) {
+  'use strict';
+  this.$$watchers = [];
+  this.$$children = [];
+  this.$parent = parent;
+  this.$id = id || 0;
+}
+
+Scope.counter = 0;
+
+Scope.prototype.$watch = function (exp, fn) {
+  'use strict';
+  this.$$watchers.push({
+    exp: exp,
+    fn: fn,
+    last: Utils.clone(this.$eval(exp))
+  });
+};
+
+Scope.prototype.$eval = function (exp) {
+  var val;
+  if (typeof exp === 'function') {
+    val = exp.call(this);
+  } else {
+    try {
+      with (this) {
+        val = eval(exp);
+      }
+    } catch (e) {
+      val = undefined;
+    }
+  }
+  return val;
+};
+
+Scope.prototype.$new = function () {
+  'use strict';
+  Scope.counter += 1;
+  var obj = new Scope(this, Scope.counter);
+  Object.setPrototypeOf(obj, this); // 将新生成的作用域原型指向当前作用域
+  this.$$children.push(obj);
+  return obj;
+};
+
+Scope.prototype.$destroy = function () {
+  'use strict';
+  var pc = this.$parent.$$children; // 从父作用域的子作用域数组中删除自己
+  pc.splice(pc.indexOf(this), 1);
+};
+
+Scope.prototype.$digest = function () { // 遍历watcher里所有项
+  'use strict';
+  var dirty, watcher, current, i;
+  do {
+    dirty = false;
+    for (i = 0; i < this.$$watchers.length; i += 1) {
+      watcher = this.$$watchers[i];
+      current = this.$eval(watcher.exp);
+      if (!Utils.equals(watcher.last, current)) {
+        watcher.last = Utils.clone(current);
+        dirty = true;
+        watcher.fn(current);
+      }
+    }
+  } while (dirty);
+  for (i = 0; i < this.$$children.length; i += 1) {
+    this.$$children[i].$digest();
+  }
+};
+```
+
+### 3.2.4 定义几个指令
+
+* 单向数据绑定`ngl-bind`
+
+```js
+Provider.directive('ngl-bind', function () {
+  return {
+    scope: false,
+    link: function (el, scope, exp) {
+      el.innerHTML = scope.$eval(exp);
+      scope.$watch(exp, function (val) {
+        el.innerHTML = val;
+      });
+    }
+  };
+});
+```
+
+* 双向绑定`ngl-model`
+
+```js
+Provider.directive('ngl-model', function () {
+  return {
+    link:  function (el, scope, exp) {
+      el.onkeyup = function () {
+        scope[exp] = el.value; // 简单起见，只用于input
+        scope.$digest();
+      };
+      scope.$watch(exp, function (val) {
+        el.value = val;
+      });
+    }
+  };
+});
+```
+
+* 指定控制器`ngl-controller`
+
+控制器需要新的作用域，所以 `scope` 设置为 `true` ，通过 `Provider.get` 获取控制器，然后激活它，在控制器里，我们可以给作用域增加属性，我们可以使用`ngl-bind/model`来绑定这些属性，当属性值改变后，我们需要确保 `$digest` 被激活，从而`ngl-bind/model`关联的监听器被激活。
+
+```js
+Provider.directive('ngl-controller', function () {
+  return {
+    scope: true,
+    link: function (el, scope, exp) {
+      var ctrl = Provider.get(exp + Provider.CONTROLLERS_SUFFIX);
+      Provider.invoke(ctrl, { $scope: scope });
+    }
+  };
+});
+```
+
+* 点击事件绑定`ngl-click`
+
+```js
+Provider.directive('ngl-click', function () {
+  return {
+    scope: false,
+    link: function (el, scope, exp) {
+      el.onclick = function () {
+        scope.$eval(exp); // html里绑定时要带括号的哦
+        scope.$digest();
+      };
+    }
+  };
+});
+```
+
+### 3.2.5 试试这个小轮子
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body ngl-controller="MainCtrl">
+  <span ngl-bind="bar"></span>
+  <button ngl-click="foo()">Increment</button>
+</body>
+</html>
+```
+
+```js
+// 注册一个名为 MainCtrl 的控制器
+Provider.controller('MainCtrl', function ($scope) {
+  $scope.bar = 0;
+  $scope.foo = function () {
+    $scope.bar += 1;
+  };
+});
+
+// 启动编译～
+DOMCompiler.bootstrap();
+```
+
+一开始 `DOMCompiler` 发现 `ngl-controller` 指令，这个指令的 `link` 函数创建新作用域并且传递给控制器的函数，控制器里我们添加了属性 `bar` ，以及函数 `foo` ， `DOMCompiler` 发现 `ngl-bind` ，然后给它关联的属性 `bar` 添加监听器， `DOMCompiler` 还发现 `ngl-click` 指令，并为按钮绑定事件处理程序。
+
+如果用户点击了按钮， `foo` 方法会通过 `$scope.$eval` 被计算然后调用， `$scope` 类似， 它被当作值传递给 `MainCtrl` 。然后， `ngl-click` 激活了 `$scope.$digest` 。`$digest` 遍历所有的监听器，检测表达式 `bar` 值的变化， 因为我们已经在 `ngl-bind` 指令定义中给定了回调函数（ `$watch`里的`function(val) {el.innerHTML = val;}`），此时该函数会被调用，然后我们看到 `span` 元素的值被更新。
 
 -----
 # 参考
