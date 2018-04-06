@@ -1,7 +1,7 @@
 ---
 title: Web缓存之浏览器缓存（HTTP缓存）
 date: 2018-04-05 16:29:29
-catetories:
+categories:
 - 前端
 tags:
 - 性能
