@@ -2,9 +2,7 @@
 title:  JS chat room项目练习总结
 date: 2017-12-12 20:36:18
 categories:
-- 前端
 - 项目总结
-- 后端
 tags:
 - koa
 - node

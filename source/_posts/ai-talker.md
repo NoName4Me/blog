@@ -1,11 +1,10 @@
 ---
 title: ai-talker
 date: 2018-01-30 19:48:04
-tags:
-- AI
-- 人工智能
 categories:
-- JS
+- AI
+tags:
+- 人工智能
 ---
 
 # 先占坑。

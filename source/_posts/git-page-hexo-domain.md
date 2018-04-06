@@ -2,7 +2,6 @@
 title: GitHub Pages + hexo（及一些博客插件）+ 域名 试水个人博客
 date: 2017-11-04 21:14:10
 categories:
-- 前端
 - 利器
 tags:
 - hexo
