@@ -18,7 +18,7 @@ tags:
 
 一句`var a = { xx: 23 };`，都出现了些什么关系网：
 
-<img src="" width=560>
+<img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/prototype-class/prototype-link-object.png" width=560>
 
 ## 1.2 函数（里看原型）
 
@@ -57,9 +57,9 @@ person.greeting();
 var person1 = Object.create(person); // 注意，person1的行为虽然和person一样（person1.name以及greeting），但两者是不同的，后面的原型链部分会说明Object.create
 ```
 
-以上得到的原型关系图如下：
+以上得到的原型关系图如下（已经省略了`Object`那一层）：
 
-<img src="" width=560>
+<img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/prototype-class/prototype-link-function.png" width=560>
 
 这个就叫构造函数，一般首字母大写，和最上面生成对象一样，我们把创建新对象的步骤交给了`new`，已经开始优雅起来了，可是`greeting`这个函数每次都要新建，不太好。
 
@@ -116,7 +116,7 @@ AgedPerson.prototype.greeting = function() {
 
 以上得到的原型关系图如下：
 
-<img src="" width=560>
+<img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/prototype-class/prototype-link-inherit.png">
 
 ## 2.3 `class`语法糖
 
