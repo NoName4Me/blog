@@ -20,6 +20,8 @@ tags:
 
 <img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/prototype-class/prototype-link-object.png" width=560>
 
+**注意：**JavaScript里比较特殊的是`Object`、`String`、`Number`等的构造器都是继承的`Function`。
+
 ## 1.2 函数（里看原型）
 
 假设让你设计一个可以创建对象的方法，你可能首先会想到这种：
@@ -99,12 +101,28 @@ function AgedPerson(name, age) {
 
 ```js
 // 设置原型关系：AgedPerson.prototype 继承 Person.prototype
-// Object.create(obj)的意思是创建一个新对象，并且它的原型是对象obj
 AgedPerson.prototype = Object.create(Person.prototype);
 
 // 但是这时，AgedPerson的原型构造器成了Person()，而不再是AgedPerson()，所以我们需要让它重新指回来
 AgedPerson.prototype.constructor = AgedPerson;
 ```
+
+**注意：** 这里解释下前面的`Object.create()`做了什么，我们可以从它的[Polyfill](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create#Polyfill)里看出些名堂来：
+
+```js
+if (typeof Object.create !== "function") {
+    Object.create = function (proto, propertiesObject) {
+        // 这里省略一些校验，感兴趣可以点击上面的Polyfill链接查看
+        
+        function F() {}
+        F.prototype = proto;
+        
+        return new F();
+    };
+}
+```
+
+所以`new MyObject()`相当于`Object.create(MyObject.prototype)`，意思就是创建一个新对象，并且它的原型是`MyObject.prototype`。
 
 那我们如果想要覆盖从`Person`原型继承的方法`greeting`呢，可以这么写：
 
