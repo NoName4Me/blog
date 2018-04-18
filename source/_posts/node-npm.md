@@ -86,3 +86,39 @@ sudo npm install npm@latest -g
 * `npm install -g n`：安装管理node的模块
 * `n stable`：安装稳定版本，也可以`n latest`安装最新版本，或者`n 版本号`安装指定版本
 * `npm install npm@latest -g`：安装最新版本npm
+
+
+# 2. 一个工程
+
+## 2.1 package.json
+
+```bash
+# 自定义命令
+## 在package.json的scripts里面设置
+"cmd": "some cmd..."
+
+#执行该命令
+npm run cmd
+
+
+#执行多个命令
+## 打开网页并启动服务(MAC)
+"start": "open http://localhost:3001 && node index.js"
+npm start
+
+## 打开网页并启动服务(MAC)
+"start": "open http://localhost:3001 && node index.js"
+
+## 启动两个服务
+"s1": "node server1.js &",
+"s2": "node server2.js &",
+"start": "npm run s1 && npm run s2"
+### 或者"start": "node server1.js & node server2.js"
+
+### 或者使用并发模块
+npm install concurrently -g
+"s1": "node server1.js",
+"s2": "node server2.js",
+"start": "concurrently \"npm run s1\" \"npm run s2\""
+npm start
+```

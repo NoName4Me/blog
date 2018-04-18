@@ -122,7 +122,12 @@ if (typeof Object.create !== "function") {
 }
 ```
 
-所以`new MyObject()`相当于`Object.create(MyObject.prototype)`，意思就是创建一个新对象，并且它的原型是`MyObject.prototype`。
+所以`new MyObject()`相当于`Object.create(MyObject.prototype)`，意思就是创建一个新对象，并且它的原型是`MyObject.prototype`，**但是**，`new`还是有点儿区别的，它经历了这么3个步骤：
+
+1. 新创建一个对象，它继承`MyObject.prototype`里的属性；
+2. **调用`MyObject`这个构造方法，然后把`this`绑定给新创建的对象；**
+3. 构造器返回的对象会将成为`new`的结果，如果构造函数没有返回（一般情况下没有返回），那么就用第1步里的对象；
+
 
 那我们如果想要覆盖从`Person`原型继承的方法`greeting`呢，可以这么写：
 
