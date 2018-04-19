@@ -48,8 +48,8 @@ function debounce_v0(coreFunc, safeWin) {
 ```js
 // 这个debounce支持立即触发（即不做防抖），以及设置在什么位置（抖动前还是抖动结束时，后者会有延迟）触发
 // opt
-//    .win: time window for debounce, if not set or 0, NOT debouce
-//    .pos: -1 / 1(or others) as invoke at leading / tailing
+//    .win: 去抖的时间窗，如果没有设置，默认不去抖
+//    .pos: -1 / 1（或其它）分别指在事件（抖动）开始时触发或事件结束时触发
 const debounce_v1 = (coreFunc, opt) => {
     let timeOutRef, ts, result, ctx, args;
 
@@ -69,17 +69,18 @@ const debounce_v1 = (coreFunc, opt) => {
         ctx = this, args = arguments;
 
         if (!opt || !opt.win || opt.win <= 0) {
-            coreFunc.apply(ctx, args);
+            result = coreFunc.apply(ctx, args);
         } else {
             ts = +new Date;
             opt.pos = opt.pos || -1;
             if (opt.pos === -1 && !timeOutRef) {
-                coreFunc.apply(ctx, args);
+                result = coreFunc.apply(ctx, args);
             }
             if(!timeOutRef) { // 当前抖动里不会再进入（没有设置为null）
                 timeOutRef = setTimeout(timerFunc, opt.win);
             }
         }
+        return result;
     }
 }
 ```
@@ -93,14 +94,28 @@ const debounce_v1 = (coreFunc, opt) => {
 
 # 2. 节流
 
+鉴于去抖中的v0中的问题，我们直接使用`setTimeout`：
 
+```js
+const throttle = (coreFunc, interval) => {
+    let inThrottle, result;
+    return function () {
+        const args = arguments, ctx = this;
+        if (!inThrottle) {
+            result = coreFunc.apply(ctx, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, interval);
+        }
+        return result;
+    }
+}
+```
 
 ## `requestAnimationFrame`
 
 实际上，对于操作DOM（或样式）的场景，节流可以选择使用 `requestAnimationFrame`（后面简称rAF），它和 `_.throttle(dosomething, 16)` 基本一致，除了rAF的启动/取消逻辑需要自己处理。
 
 使用参考[这篇博文](http://jonge.club/2018/03/23/smooth-animation/#2-2-requestAnimationFrame%E6%98%AF%E4%BB%80%E4%B9%88)。
-
 
 -----
 
