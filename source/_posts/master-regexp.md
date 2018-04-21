@@ -11,6 +11,8 @@ tags:
 
 # 1. 基础
 
+基础的东西就直接查看[MDN RegExp Doc](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)吧。
+
 ## 1.1 反义
 
 |代码|说明|
@@ -21,7 +23,6 @@ tags:
 | `\B` |匹配不是单词开头或结束的位置|
 | `[^x]` |匹配除了x以外的任意字符|
 | `[^aeiou]` |匹配除了aeiou这几个字母以外的任意字符|
-
 
 ## 1.2 反向引用
 
@@ -40,6 +41,8 @@ tags:
 
 ## 1.3 正则匹配的原理
 
+正则就是基于这种有穷自动机的理论的，正则里的这种自动机叫做正则引擎。
+
 ### 1.3.1 有穷自动机
 
 有穷自动机一般满足下列4个条件：
@@ -49,17 +52,16 @@ tags:
 3. 有起始状态
 4. 有终止状态
 
-
-正则就是基于这种有穷自动机的理论的，举个例子，正则表达式 `a(bb)+a` 的状态转移图如下：
-<img src="" width=400>
+举个例子，正则表达式 `a(bb)+a` 的状态转移图如下：
+<img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/master-regexp/finite-states-example.png" width=480>
 
 下面是一个匹配字符串 `"abbbba"` 的分解步骤：
 
-<img src="" width=400>
+<img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/master-regexp/finite-states-example-steps.png" width=400>
 
-实际上下面两个有穷状态机和前面的是等价的，下面第1个图里在S1中的
+实际上下面两个有穷状态机和前面的是等价的，下面第 1 个图里在输入 `ab` 后，在状态 S2，如果继续输入 `b`，那么此时的状态就不确定了，可能在S1，也可能在 S3，而第 2 个图更神奇，在没有任何输入的情况，也会转移到 S1，所以这两个状态机叫做非确定型有穷自动机（NFA，Non-definite Finite Automata），最前面那个状态机是确定型有穷自动机（DFA），每一个状态到另一个状态都是确定的。
 
-<img src="" width=400>
+<img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/master-regexp/finite-states-nfa-example-steps.png" width=480>
 
 ## 1.3.2 匹配优先和忽略优先
 
@@ -94,3 +96,4 @@ ab 匹配 ab
 2. [ECMAScript regular expressions are getting better!](https://mathiasbynens.be/notes/es-regexp-proposals)
 3. [RegExp lookbehind assertions](https://v8project.blogspot.com/2016/02/regexp-lookbehind-assertions.html)
 4. 《正则指引》余晟
+5. https://stackoverflow.com/questions/2973436/regex-lookahead-lookbehind-and-atomic-groups
