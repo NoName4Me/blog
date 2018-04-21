@@ -11,7 +11,8 @@ tags:
 
 # 1. 基础
 
-基础的东西就直接查看[MDN RegExp Doc](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)吧。
+基础的东西就直接查看 [MDN RegExp Doc](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)吧。
+<!-- more -->
 
 ## 1.1 反义
 
@@ -63,7 +64,7 @@ tags:
 
 <img src="https://raw.githubusercontent.com/NoName4Me/blog/master/source/_posts/master-regexp/finite-states-nfa-example-steps.png" width=480>
 
-## 1.3.2 匹配优先和忽略优先
+### 1.3.2 匹配优先和忽略优先
 
 匹配优先（贪婪）：当表达式中的某个位置不确定是否匹配时，优先选择**匹配**，如果该位置后的表达式无法继续匹配，则逐步回溯。
 忽略优先（懒惰）：当表达式中的某个位置不确定是否匹配时，优先选择**忽略**，如果该位置后的表达式无法继续匹配，则选择匹配，继续往下测试。
