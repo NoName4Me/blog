@@ -92,7 +92,27 @@ function AgedPerson(name, age) {
     Person.call(this, name); // 注意这个this的上下文
     this.age = age; // 新的属性：age
 }
+```
 
+* `instanceof` 操作符
+
+以 `obj instanceof constructor` 为例说明，`instanceof` 的作用是判断 `constructor.prototype` 是否在 `obj` 的原型链上。
+
+**注意2点：**
+
+1. JS中的对象都是由Object这个构造函数生成的实例（构造函数也不例外）
+2. `Object`、`Function`、`Array` 等构造函数都是构造函数 `Function` 的实例
+
+```js
+// Function instanceof Object > true
+Function.__proto__.__proto__ === Object.prototype
+
+// Object instanceof Function > true
+Object.__proto__ === Function.prototype
+
+// 下面两个也都是true
+Object instanceof Object
+Function instanceof Function
 ```
 
 ## 2.2 继承
@@ -103,7 +123,7 @@ function AgedPerson(name, age) {
 // 设置原型关系：AgedPerson.prototype 继承 Person.prototype
 AgedPerson.prototype = Object.create(Person.prototype);
 
-// 但是这时，AgedPerson的原型构造器成了Person()，而不再是AgedPerson()，所以我们需要让它重新指回来
+// 但是这时，AgedPerson的原型构造器成了Person，而不再是AgedPerson，所以我们需要让它重新指回来
 AgedPerson.prototype.constructor = AgedPerson;
 ```
 
@@ -127,7 +147,6 @@ if (typeof Object.create !== "function") {
 1. 新创建一个对象，它继承`MyObject.prototype`里的属性；
 2. **调用`MyObject`这个构造方法，然后把`this`绑定给新创建的对象；**
 3. 构造器返回的对象会将成为`new`的结果，如果构造函数没有返回（一般情况下没有返回），那么就用第1步里的对象；
-
 
 那我们如果想要覆盖从`Person`原型继承的方法`greeting`呢，可以这么写：
 
