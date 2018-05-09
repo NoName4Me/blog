@@ -147,6 +147,8 @@ window.addEventListener('scroll', onScroll);
 
 ## 2.4 `Web Worker`和微任务
 
+> 了解更多关于[Web Worker](http://jonge.club/2018/05/09/web-worker/)。
+
 当一些耗时的JS处理与样式计算、布局在一起时，会阻塞它们对界面的及时更新，此时如果那些JS处理并不关注DOM，可以放到`Web Worker`里（如下示例），但是注意，`Web Worker`没有DOM访问权限。
 
 ```js
