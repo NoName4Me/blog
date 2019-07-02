@@ -115,7 +115,7 @@ const throttle = (coreFunc, interval) => {
 
 实际上，对于操作DOM（或样式）的场景，节流可以选择使用 `requestAnimationFrame`（后面简称rAF），它和 `_.throttle(dosomething, 16)` 基本一致，除了rAF的启动/取消逻辑需要自己处理。
 
-使用参考[这篇博文](http://jonge.club/2018/03/23/smooth-animation/#2-2-requestAnimationFrame%E6%98%AF%E4%BB%80%E4%B9%88)。
+使用参考[这篇博文](https://noname4me.github.io/2018/03/23/smooth-animation/#2-2-requestAnimationFrame%E6%98%AF%E4%BB%80%E4%B9%88)。
 
 -----
 

@@ -10,7 +10,7 @@ tags:
 >
 >**内容：** 类。
 
-# 2. 学习（接[上一篇](http://jonge.club/2017/12/16/typeScript-learn-1/))
+# 2. 学习（接[上一篇](https://noname4me.github.io/2017/12/16/typeScript-learn-1/))
 
 ## 2.3 类
 

@@ -2,5 +2,4 @@
 
 > just a blog. O(∩_∩)O
 
-
-https://jonge.club
+https://noname4me.github.io/
