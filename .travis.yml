@@ -1,0 +1,24 @@
+language:
+  node_js
+node_js:
+  - "8"
+install:
+  - npm install -g yarn
+script:
+  - yarn
+  - yarn build
+# after_script:
+#   - cd dist
+#   - git init
+#   - git config user.name "NoName4Me"
+#   - git config user.email "anich.evas@gmail.com"
+#   - git add .
+#   - git commit -m "Update Blog"
+#   - git push -f "https://${GITHUB_TOKEN}@noname4me.github.io" master
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: dist/  # or remove this line to upload from root of repo
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  on:
+    branch: master
