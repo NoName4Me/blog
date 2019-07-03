@@ -7,16 +7,9 @@ install:
 script:
   - yarn
   - yarn build
-# after_script:
-#   - cd dist
-#   - git init
-#   - git config user.name "NoName4Me"
-#   - git config user.email "anich.evas@gmail.com"
-#   - git add .
-#   - git commit -m "Update Blog"
-#   - git push -f "https://${GITHUB_TOKEN}@noname4me.github.io" master
 deploy:
   repo: noname4me/noname4me.github.io
+  keep_history: true
   target_branch: master
   provider: pages
   skip_cleanup: true
