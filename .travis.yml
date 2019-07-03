@@ -7,13 +7,11 @@ install:
 script:
   - yarn
   - yarn build
-deploy:
-  repo: noname4me/noname4me.github.io
-  keep_history: true
-  target_branch: master
-  provider: pages
-  skip_cleanup: true
-  local_dir: build/  # or remove this line to upload from root of repo
-  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
-  on:
-    branch: master
+after_script:
+  - git clone "https://${GITHUB_TOKEN}@${GITHUB_REPO}"
+  - cd noname4me.github.io
+  - mkdir -p solutions/mind-map
+  - cp -Rf ../build/* ./
+  - git add .
+  - git commit -m "update Blog"
+  - git push
